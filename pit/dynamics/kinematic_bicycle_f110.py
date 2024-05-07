@@ -4,6 +4,26 @@ import torch
 from torch import nn
 
 
+# Reference: https://github.com/ETH-PBL/MAP-Controller/blob/main/steering_lookup/src/LUT_Generation/dynamics/vehicle_dynamics_stown.py
+
+class UncertaintyModel(nn.Module):
+    """
+    Out put the diag covariance matrix.
+
+    input: history state:(x, y, v, ...)*state_steps
+    output: diag of covariance matrix
+    """
+    def __init__(self, state_dim, state_steps):
+        super().__init__()
+
+
+
+class DynamicDistribution(nn.Module):
+    def __init__(self, dynamic):
+        super().__init__()
+        pass
+
+
 class KinematicBicycle_Steer(Dynamics, nn.Module):
     """
     """
@@ -23,7 +43,6 @@ class KinematicBicycle_Steer(Dynamics, nn.Module):
         self.V = 4
         self.STEER = 0
         self.VEL = 1
-
 
     def forward(self, states, control_inputs):
         """ Get the evaluated ODEs of the state at this point
